@@ -1,0 +1,111 @@
+<html>
+ <head>
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    <script type="text/javascript" src="TShirtRepository.js"></script>
+    <script type="text/javascript" src="PhoneCaseRepository.js"></script>
+	<script type="text/javascript" src="ProductDataConsolidator.js"></script>
+    <script type="text/javascript" src="Util.js"></script>
+   	<script type="text/javascript" src="Main.js"></script>
+ </head>
+<body>
+	 <div ng-app="shoppingList" ng-controller="ShoppingController">
+	 	
+	 	 <div ng-show="!showEditForm && !showAddForm">	 
+		 	 <table class="table table-striped">
+				<thead>
+					<tr><td colspan="3">Product List</td></tr>
+					<tr>
+					    <td>Id</td>
+						<td>Name</td>
+						<td>Price</td>
+						<td>Type</td>
+					    <td></td>
+					    <td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in shoppingCarts">
+						<td>{{x.id}}</td>
+						<td>{{x.name}}</td>
+						<td>{{x.price}}</td>
+						<td>{{x.type}}</td>
+					    <td> <a><span ng-click="editProduct($index)">Edit</span></a></td>
+						<td> <a><span ng-click="removeProduct($index)">Remove</span></a></td>
+					</tr>
+				</tbody>
+			 </table>		
+		 	  <button ng-click="newProduct()">New Product</button>
+          </div>
+
+	 	  <div ng-show="showAddForm">
+	 	  	<div style="margin-left:10px;">
+	 	  	  <div><a><span ng-click="backToMainPage()">Back</span></a></div>
+			  <h4>Add Form</h4>
+
+		 	  <div>
+			 	  	<label>Name</label>
+		 	  </div>
+		 	   <div>
+			 	  	<input style="width:500px;"  ng-model="prodName">
+		 	  </div>
+		 	  
+		 	  <div>
+		 	   	 	<label>Price</label>
+		 	  </div>
+		 	  <div>
+		 	  	    <input style="width:200px;" ng-model="prodPrice">
+		 	  </div>
+
+  			   <div>
+		 	 	 	<label>Type</label>
+		 	  </div>
+		 	  <div>
+		 	  	    <select style="width:200px;" class="form-control" ng-model='prodType' 
+			 			    ng-options="opt as opt.Name for opt in prodTypes">
+		 			 </select>
+		 	  </div>
+
+		 	  <div>
+					<button style="margin-top:10px;" ng-click="saveProduct()">Save</button>
+		 	  </div>
+		 	 </div>
+		  </div>
+
+		   <div ng-show="showEditForm">
+	 	  	<div style="margin-left:10px;">
+	 	      <div><a><span ng-click="backToMainPage()">Back</span></a></div>
+			  <h4>Edit Form</h4>
+
+			  <div>
+			 	  	<label>Name</label>
+		 	  </div>
+		 	  <div>
+			 	  	<input style="width:500px;" ng-model="prodInfo.name">
+		 	  </div>
+		 	  
+		 	  <div>
+		 	   	 	<label>Price</label>
+		 	  </div>	  
+		 	  <div>
+		 	  	    <input style="width:200px;" ng-model="prodInfo.price">
+		 	  </div>
+
+		 	  <div>
+		 	 	 	<label>Type</label>
+		 	  </div>
+		 	   <div>
+		 	  	    <select style="width:200px;" class="form-control" ng-model='prodInfo.type' 
+			 			    ng-options="opt as opt.Name for opt in prodTypes">
+		 			 </select>
+		 	  </div>
+
+		 	  <div>
+					<button style="margin-top:10px;" ng-click="updateProduct()">Update</button>
+		 	  </div>
+		 	 </div>
+		  </div>
+	 </div>
+</body>
+</html>
